@@ -12,8 +12,6 @@ const ReStartButton = ({ onReStart: handleRestart, className }: ReStartBtnProps)
         btnRef.current?.blur();
         handleRestart();
     };
-
-
     return (
         <button
             onClick={handleClick}
