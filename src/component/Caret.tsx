@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const Caret = () => {
     return <motion.div
-        className="inline-block w-0.5 h-7 bg-primary-500"
+        className="inline-block w-0.5 h-7 dark:bg-primary-500 bg-green-500"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 1 }}
