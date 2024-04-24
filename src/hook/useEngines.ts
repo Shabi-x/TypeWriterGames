@@ -6,7 +6,7 @@ import { countErrors } from "../utils/helper";
 
 export type State = "start" | "run" | "finish";
 
-const initialTime = 10;
+const initialTime = 60;
 
 const useEngine = () => {
   const [state, setState] = useState<State>("start");
@@ -17,7 +17,7 @@ const useEngine = () => {
     state != "finish"
   );
   const AreWordsFinished = cursor == words.length;
-  const { timeLeft, resetCountDown, startCountDown } =
+  const { timeLeft, startCountDown, resetCountDown } =
     useCountdownTimer(initialTime);
 
   const restart = () => {
@@ -32,10 +32,10 @@ const useEngine = () => {
   const sumErrors = useCallback(() => {
     const wordsReached = words.substring(0, Math.min(words.length, cursor));
     setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached));
-  }, [cursor, typed, words]);
+  }, [words, cursor, typed]);
 
   useEffect(() => {
-    if (state === "start" || cursor > 0) {
+    if (state === "start" && cursor > 0) {
       setState("run");
       startCountDown();
     }
@@ -59,6 +59,7 @@ const useEngine = () => {
   return {
     state,
     words,
+    updateWords,
     timeLeft,
     typed,
     errors,
